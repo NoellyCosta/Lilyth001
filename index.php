@@ -29,20 +29,65 @@
         </div>
     </div>
 </main>
-<div class="col-100">
-    <div class="slider-principal">
-        <?php $template_directory = get_template_directory_uri(); ?>
-        <img src="<?php echo $template_directory; ?>/assets/img/layer1.png" />
-        <?php $template_directory = get_template_directory_uri(); ?>
-        <img src="<?php echo $template_directory; ?>/assets/img/layer1.png" />
-        <?php $template_directory = get_template_directory_uri(); ?>
-        <img src="<?php echo $template_directory; ?>/assets/img/layer1.png" />
-        <?php $template_directory = get_template_directory_uri(); ?>
-        <img src="<?php echo $template_directory; ?>/assets/img/layer1.png" />
-        <?php $template_directory = get_template_directory_uri(); ?>
-        <img src="<?php echo $template_directory; ?>/assets/img/layer1.png" />
+<div class="row">
+    <div clas="col mb-5">
+
+        <div id="carouselBWP" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+
+            </ol>
+            <div class="carousel-inner">
+
+                <?php
+                //args
+                $my_args_banner = array(
+                    'post_type'      => 'banner',
+                    'posts_per_page' => '3',
+                );
+                //query
+                $my_query_banner = new WP_Query($my_args_banner);
+                ?>
+
+                <?php if ($my_query_banner->have_posts()) :
+                    $banner = banners[0];
+                    $c = 0;
+                    while ($my_query_banner->have_posts()) : $my_query_banner->the_post(); ?>
+
+                        <div class="carousel-item <?php $c++;
+                                                    if ($c == 1) {
+                                                        echo 'active';
+                                                    } ?>">
+                            <?php the_post_thumbnail('post-thumbnail', 'full', array('class' => 'img-fluid')) ?>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5><?php the_title(); ?></h5>
+                            </div>
+                        </div>
+
+                <?php endwhile;
+                endif; ?>
+
+                <?php wp_reset_query(); ?>
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselBWP" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+
+            <a class="carousel-control-next" href="#carouselBWP" role="button" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
+
+
+        </div>
     </div>
 </div>
+
 
 <div class="col-100">
     <div class="content texto-destaque">
