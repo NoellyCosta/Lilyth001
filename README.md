@@ -1,2 +1,2 @@
-# Lilyth001
-demostration
+# Landing Page 001
+Template criado para auxiliar na montagem de um tema em wordpress
